@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("maven-publish")
+    `maven-publish`
 }
 
 android {
@@ -24,6 +24,20 @@ android {
             withJavadocJar()
         }
     }
+
+//    publishing {
+//        publications {
+//            register<MavenPublication>("release") {
+//                groupId = "com.my-company"
+//                artifactId = "my-library"
+//                version = "1.0"
+//
+//                afterEvaluate {
+//                    from(components["release"])
+//                }
+//            }
+//        }
+//    }
 
     buildTypes {
         release {

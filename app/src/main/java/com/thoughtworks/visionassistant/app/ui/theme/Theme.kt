@@ -1,4 +1,4 @@
-package com.thoughtworks.visionassistant.app.theme
+package com.thoughtworks.visionassistant.app.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

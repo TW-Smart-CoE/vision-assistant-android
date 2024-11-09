@@ -40,7 +40,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
     implementation(project(":opencv-kit"))
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

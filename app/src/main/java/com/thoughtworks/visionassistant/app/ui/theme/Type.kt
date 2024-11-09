@@ -1,4 +1,4 @@
-package com.thoughtworks.visionassistant.app.theme
+package com.thoughtworks.visionassistant.app.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

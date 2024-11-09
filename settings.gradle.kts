@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 rootProject.name = "vision-assistant-android"
 include(":app")
 include(":opencv-kit")
+include(":core")

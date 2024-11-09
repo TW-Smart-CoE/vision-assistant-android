@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">vision-assistant-android</string>
+    <string name="ok_btn" translatable="false">OK</string>
+    <string name="request_permission_screen_title" translatable="false">Permission Request</string>
+    <string name="denied_permissions_title" translatable="false">Denied Permissions:</string>
+    <string name="all_permission_granted" translatable="false">All permissions granted!</string>
+    <string name="request_permission_btn" translatable="false">Request Permissions</string>
+    <string name="opencv" translatable="false">OpenCV</string>
+    <string name="opencv_not_initialized" translatable="false">OpenCV is not initialized</string>
 </resources>

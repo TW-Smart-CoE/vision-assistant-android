@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     id("maven-publish")
 }
 
 android {
-    namespace = "com.thoughtworks.visionassistant.opencvkit"
+    namespace = "com.thoughtworks.visionassistant.core"
     compileSdk = 35
 
     defaultConfig {
@@ -32,16 +31,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.thoughtworks.visionassistant"
-            artifactId = "opencv-kit"
+            artifactId = "core"
             version = "0.1.0"
 
             afterEvaluate {
@@ -52,19 +48,9 @@ publishing {
 }
 
 dependencies {
-    implementation(project(":core"))
-
-    implementation(libs.opencv)
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

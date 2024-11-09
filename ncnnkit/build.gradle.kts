@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.thoughtworks.visionassistant.opencvkit"
+    namespace = "com.thoughtworks.visionassistant.ncnnkit"
     compileSdk = 35
 
     defaultConfig {
@@ -14,6 +14,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        externalNativeBuild {
+            cmake {
+                cppFlags("")
+            }
+        }
     }
 
     buildTypes {
@@ -23,6 +28,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
     compileOptions {
@@ -41,7 +52,7 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.thoughtworks.visionassistant"
-            artifactId = "opencv-kit"
+            artifactId = "ncnnkit"
             version = "0.1.0"
 
             afterEvaluate {
@@ -53,8 +64,6 @@ publishing {
 
 dependencies {
     implementation(project(":core"))
-
-    implementation(libs.opencv)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -13,6 +13,8 @@ import com.thoughtworks.visionassistant.opencvkit.views.CameraView
 fun FaceDetectView(
     modifier: Modifier = Modifier,
     flipVertical: Boolean = false,
+    cameraId: Int = 0,
+    isCamera2: Boolean,
     frameSkip: Int = 0,
     faceDetectorListener: FaceDetector.FaceDetectorListener,
     logger: Logger = DefaultLogger(),
@@ -30,7 +32,8 @@ fun FaceDetectView(
 
     CameraView(
         modifier = modifier,
-        cameraId = 0,
+        cameraId = cameraId,
+        isCamera2 = isCamera2,
         faceDetector,
     )
 }

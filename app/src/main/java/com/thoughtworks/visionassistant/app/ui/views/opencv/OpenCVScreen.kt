@@ -72,6 +72,8 @@ fun OpenCVScreen(
                                 .width(320.dp)
                                 .height(320.dp),
                             flipVertical = false,
+                            cameraId = 0,
+                            isCamera2 = false,
                             frameSkip = 0,
                             faceDetectorListener = viewModel,
                         )

@@ -13,13 +13,16 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import org.opencv.android.CameraBridgeViewBase
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2
+import org.opencv.android.JavaCamera2View
 import org.opencv.android.JavaCameraView
 
 @Composable
 fun CameraView(
     modifier: Modifier = Modifier,
     cameraId: Int = 0,
+    isCamera2: Boolean,
     cameraViewListener: CvCameraViewListener2,
     placeholderView: @Composable () -> Unit = { Text("Requesting camera permission...") },
 ) {
@@ -32,6 +35,15 @@ fun CameraView(
             lifecycleOwner.lifecycle.removeObserver(it)
             lifecycleObserver = null
         }
+    }
+
+    fun initCameraView(cameraView: CameraBridgeViewBase) {
+        cameraView.setCvCameraViewListener(cameraViewListener)
+        cameraView.setCameraPermissionGranted()
+        cameraView.enableView()
+        removeLifecycleObserver()
+        lifecycleObserver = CameraLifecycleObserver(cameraView)
+        lifecycleOwner.lifecycle.addObserver(lifecycleObserver!!)
     }
 
     DisposableEffect(lifecycleOwner) {
@@ -47,14 +59,14 @@ fun CameraView(
     if (hasCameraPermission) {
         AndroidView(
             factory = { context ->
-                JavaCameraView(context, cameraId).apply {
-                    setCvCameraViewListener(cameraViewListener)
-                    setCameraPermissionGranted()
-                    enableView()
-
-                    removeLifecycleObserver()
-                    lifecycleObserver = CameraLifecycleObserver(this)
-                    lifecycleOwner.lifecycle.addObserver(lifecycleObserver!!)
+                if (isCamera2) {
+                    JavaCamera2View(context, cameraId).apply {
+                        initCameraView(this)
+                    }
+                } else {
+                    JavaCameraView(context, cameraId).apply {
+                        initCameraView(this)
+                    }
                 }
             },
             modifier = modifier
@@ -64,7 +76,8 @@ fun CameraView(
     }
 }
 
-class CameraLifecycleObserver(private val cameraView: JavaCameraView) : LifecycleEventObserver {
+class CameraLifecycleObserver(private val cameraView: CameraBridgeViewBase) :
+    LifecycleEventObserver {
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
             Lifecycle.Event.ON_RESUME -> cameraView.enableView()

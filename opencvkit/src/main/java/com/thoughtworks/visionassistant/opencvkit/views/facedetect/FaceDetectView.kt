@@ -20,7 +20,7 @@ fun FaceDetectView(
     logger: Logger = DefaultLogger(),
 ) {
     val context = LocalContext.current
-    val faceDetector = remember(flipVertical, frameSkip) {
+    val faceDetector = remember(cameraId, isCamera2, flipVertical, frameSkip) {
         FaceDetector(
             context,
             flipVertical,

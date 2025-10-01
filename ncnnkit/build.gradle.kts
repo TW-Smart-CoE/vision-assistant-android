@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.thoughtworks.visionassistant.ncnnkit"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -45,6 +45,13 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
     }
 }
 

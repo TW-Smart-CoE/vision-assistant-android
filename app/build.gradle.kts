@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.thoughtworks.visionassistant.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.thoughtworks.visionassistant.app"
